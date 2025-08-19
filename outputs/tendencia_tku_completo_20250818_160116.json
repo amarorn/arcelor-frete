@@ -1,0 +1,266 @@
+{
+  "USINA": {
+    "microregiao": "USINA",
+    "tendencia": {
+      "direcao": "AUMENTANDO",
+      "forca": "MODERADA",
+      "inclinacao": 0.001134,
+      "r_quadrado": 0.0142,
+      "confiabilidade": "BAIXA"
+    },
+    "precos": {
+      "atual": 0.7095,
+      "recomendado": 0.7095,
+      "acao": "MANTER",
+      "diferenca_percentual": 0.0
+    },
+    "estatisticas_gerais": {
+      "total_rotas": 98013,
+      "periodo_analise": "2024-01 a 2025-08",
+      "preco_medio_geral": 0.6312,
+      "preco_mediano_geral": 0.5201,
+      "desvio_padrao_geral": 2.9114,
+      "volume_total_ton": 1397247.26,
+      "distancia_media_km": 424.66
+    },
+    "evolucao_mensal": [
+      {
+        "ano_mes": "2024-01",
+        "preco_ton_km_mean": 0.5665,
+        "preco_ton_km_median": 0.4889,
+        "preco_ton_km_std": 1.1667,
+        "preco_ton_km_count": 5525,
+        "volume_ton_sum": 68692.003,
+        "distancia_km_mean": 466.3149,
+        "ano_mes_str": "2024-01"
+      },
+      {
+        "ano_mes": "2024-02",
+        "preco_ton_km_mean": 0.5673,
+        "preco_ton_km_median": 0.4921,
+        "preco_ton_km_std": 0.4088,
+        "preco_ton_km_count": 5295,
+        "volume_ton_sum": 67238.639,
+        "distancia_km_mean": 458.0881,
+        "ano_mes_str": "2024-02"
+      },
+      {
+        "ano_mes": "2024-03",
+        "preco_ton_km_mean": 0.6317,
+        "preco_ton_km_median": 0.5046,
+        "preco_ton_km_std": 2.1697,
+        "preco_ton_km_count": 5702,
+        "volume_ton_sum": 74337.194,
+        "distancia_km_mean": 461.6148,
+        "ano_mes_str": "2024-03"
+      },
+      {
+        "ano_mes": "2024-04",
+        "preco_ton_km_mean": 0.6976,
+        "preco_ton_km_median": 0.4921,
+        "preco_ton_km_std": 2.9748,
+        "preco_ton_km_count": 6022,
+        "volume_ton_sum": 75877.153,
+        "distancia_km_mean": 442.6022,
+        "ano_mes_str": "2024-04"
+      },
+      {
+        "ano_mes": "2024-05",
+        "preco_ton_km_mean": 0.5667,
+        "preco_ton_km_median": 0.4558,
+        "preco_ton_km_std": 0.8867,
+        "preco_ton_km_count": 6458,
+        "volume_ton_sum": 75780.946,
+        "distancia_km_mean": 487.1671,
+        "ano_mes_str": "2024-05"
+      },
+      {
+        "ano_mes": "2024-06",
+        "preco_ton_km_mean": 0.6378,
+        "preco_ton_km_median": 0.4889,
+        "preco_ton_km_std": 2.5217,
+        "preco_ton_km_count": 6074,
+        "volume_ton_sum": 79942.323,
+        "distancia_km_mean": 585.9698,
+        "ano_mes_str": "2024-06"
+      },
+      {
+        "ano_mes": "2024-07",
+        "preco_ton_km_mean": 0.7758,
+        "preco_ton_km_median": 0.4921,
+        "preco_ton_km_std": 10.296,
+        "preco_ton_km_count": 5694,
+        "volume_ton_sum": 80331.874,
+        "distancia_km_mean": 448.2695,
+        "ano_mes_str": "2024-07"
+      },
+      {
+        "ano_mes": "2024-08",
+        "preco_ton_km_mean": 0.6408,
+        "preco_ton_km_median": 0.5281,
+        "preco_ton_km_std": 0.8806,
+        "preco_ton_km_count": 5402,
+        "volume_ton_sum": 78256.384,
+        "distancia_km_mean": 467.6058,
+        "ano_mes_str": "2024-08"
+      },
+      {
+        "ano_mes": "2024-09",
+        "preco_ton_km_mean": 0.6289,
+        "preco_ton_km_median": 0.5479,
+        "preco_ton_km_std": 0.5383,
+        "preco_ton_km_count": 4924,
+        "volume_ton_sum": 68779.477,
+        "distancia_km_mean": 400.5163,
+        "ano_mes_str": "2024-09"
+      },
+      {
+        "ano_mes": "2024-10",
+        "preco_ton_km_mean": 0.6065,
+        "preco_ton_km_median": 0.533,
+        "preco_ton_km_std": 0.6226,
+        "preco_ton_km_count": 5441,
+        "volume_ton_sum": 75891.311,
+        "distancia_km_mean": 400.8624,
+        "ano_mes_str": "2024-10"
+      },
+      {
+        "ano_mes": "2024-11",
+        "preco_ton_km_mean": 0.6261,
+        "preco_ton_km_median": 0.5281,
+        "preco_ton_km_std": 0.6451,
+        "preco_ton_km_count": 5128,
+        "volume_ton_sum": 71853.904,
+        "distancia_km_mean": 411.5505,
+        "ano_mes_str": "2024-11"
+      },
+      {
+        "ano_mes": "2024-12",
+        "preco_ton_km_mean": 0.6963,
+        "preco_ton_km_median": 0.658,
+        "preco_ton_km_std": 1.2257,
+        "preco_ton_km_count": 3788,
+        "volume_ton_sum": 57051.13,
+        "distancia_km_mean": 390.6954,
+        "ano_mes_str": "2024-12"
+      },
+      {
+        "ano_mes": "2025-01",
+        "preco_ton_km_mean": 0.6966,
+        "preco_ton_km_median": 0.6385,
+        "preco_ton_km_std": 1.0581,
+        "preco_ton_km_count": 4005,
+        "volume_ton_sum": 64030.337,
+        "distancia_km_mean": 355.3127,
+        "ano_mes_str": "2025-01"
+      },
+      {
+        "ano_mes": "2025-02",
+        "preco_ton_km_mean": 0.592,
+        "preco_ton_km_median": 0.4921,
+        "preco_ton_km_std": 1.1358,
+        "preco_ton_km_count": 4114,
+        "volume_ton_sum": 71350.952,
+        "distancia_km_mean": 383.4667,
+        "ano_mes_str": "2025-02"
+      },
+      {
+        "ano_mes": "2025-03",
+        "preco_ton_km_mean": 0.6576,
+        "preco_ton_km_median": 0.533,
+        "preco_ton_km_std": 3.0388,
+        "preco_ton_km_count": 4528,
+        "volume_ton_sum": 78712.985,
+        "distancia_km_mean": 364.3315,
+        "ano_mes_str": "2025-03"
+      },
+      {
+        "ano_mes": "2025-04",
+        "preco_ton_km_mean": 0.5771,
+        "preco_ton_km_median": 0.5223,
+        "preco_ton_km_std": 0.3465,
+        "preco_ton_km_count": 4814,
+        "volume_ton_sum": 79068.425,
+        "distancia_km_mean": 354.9119,
+        "ano_mes_str": "2025-04"
+      },
+      {
+        "ano_mes": "2025-05",
+        "preco_ton_km_mean": 0.6361,
+        "preco_ton_km_median": 0.5267,
+        "preco_ton_km_std": 2.2234,
+        "preco_ton_km_count": 5261,
+        "volume_ton_sum": 82511.417,
+        "distancia_km_mean": 374.0111,
+        "ano_mes_str": "2025-05"
+      },
+      {
+        "ano_mes": "2025-06",
+        "preco_ton_km_mean": 0.5908,
+        "preco_ton_km_median": 0.533,
+        "preco_ton_km_std": 0.2954,
+        "preco_ton_km_count": 5055,
+        "volume_ton_sum": 75970.59,
+        "distancia_km_mean": 352.2777,
+        "ano_mes_str": "2025-06"
+      },
+      {
+        "ano_mes": "2025-07",
+        "preco_ton_km_mean": 0.6083,
+        "preco_ton_km_median": 0.5668,
+        "preco_ton_km_std": 0.3602,
+        "preco_ton_km_count": 4347,
+        "volume_ton_sum": 65188.046,
+        "distancia_km_mean": 365.475,
+        "ano_mes_str": "2025-07"
+      },
+      {
+        "ano_mes": "2025-08",
+        "preco_ton_km_mean": 0.7095,
+        "preco_ton_km_median": 0.7931,
+        "preco_ton_km_std": 0.229,
+        "preco_ton_km_count": 436,
+        "volume_ton_sum": 6382.168,
+        "distancia_km_mean": 226.9512,
+        "ano_mes_str": "2025-08"
+      }
+    ],
+    "ultimos_faturamentos": [
+      {
+        "data_faturamento": "2025-08-05",
+        "preco_ton_km": 0.532688966358101,
+        "volume_ton": 31.998,
+        "distancia_km": 455.987,
+        "rota_mesoregiao": "METROPOLITANA DE BELO HORIZONTE-LITORAL NORTE ESPÍRITO-SANTENSE"
+      },
+      {
+        "data_faturamento": "2025-08-05",
+        "preco_ton_km": 0.4253805222125975,
+        "volume_ton": 2.232,
+        "distancia_km": 517.184,
+        "rota_mesoregiao": "METROPOLITANA DE BELO HORIZONTE-SUL FLUMINENSE"
+      },
+      {
+        "data_faturamento": "2025-08-05",
+        "preco_ton_km": 0.4253805222125975,
+        "volume_ton": 24.552,
+        "distancia_km": 517.184,
+        "rota_mesoregiao": "METROPOLITANA DE BELO HORIZONTE-SUL FLUMINENSE"
+      },
+      {
+        "data_faturamento": "2025-08-05",
+        "preco_ton_km": 0.42538052221259753,
+        "volume_ton": 33.48,
+        "distancia_km": 517.184,
+        "rota_mesoregiao": "METROPOLITANA DE BELO HORIZONTE-SUL FLUMINENSE"
+      },
+      {
+        "data_faturamento": "2025-08-05",
+        "preco_ton_km": 0.7786644196407828,
+        "volume_ton": 2.232,
+        "distancia_km": 140.088,
+        "rota_mesoregiao": "METROPOLITANA DE BELO HORIZONTE-METROPOLITANA DE BELO HORIZONTE"
+      }
+    ]
+  }
+}

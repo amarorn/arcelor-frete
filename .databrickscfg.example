@@ -1,0 +1,6 @@
+[DEFAULT]
+host = https://your-workspace.azuredatabricks.net
+token = your-databricks-token-here
+cluster_id = your-cluster-id-here
+org_id = your-org-id-here
+port = 15001
