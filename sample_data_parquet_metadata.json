@@ -1,0 +1,141 @@
+{
+  "dataset_info": {
+    "nome": "Dados de Frete ArcelorMittal",
+    "descricao": "Dados históricos de fretes com análise de tendências TKU",
+    "fonte": "sample_data.xlsx",
+    "formato_original": "Excel (.xlsx)",
+    "formato_atual": "Parquet (.parquet)",
+    "data_criacao": "2025-08-19T08:44:41.788854",
+    "versao": "1.0"
+  },
+  "estatisticas": {
+    "total_registros": 143661,
+    "total_colunas": 20,
+    "periodo_dados": {
+      "inicio": "2024-01-01T00:00:00",
+      "fim": "2025-08-05T00:00:00"
+    }
+  },
+  "colunas": {
+    "data_faturamento": {
+      "tipo": "object",
+      "valores_unicos": 583,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "centro_origem": {
+      "tipo": "object",
+      "valores_unicos": 1,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "centro_origem_descricao": {
+      "tipo": "object",
+      "valores_unicos": 1,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "modal": {
+      "tipo": "object",
+      "valores_unicos": 4,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "tipo_rodovia": {
+      "tipo": "object",
+      "valores_unicos": 2,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "tipo_veiculo": {
+      "tipo": "object",
+      "valores_unicos": 8,
+      "valores_nulos": "41914",
+      "percentual_nulos": 29.17562873709636
+    },
+    "rota_uf": {
+      "tipo": "object",
+      "valores_unicos": 16,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "rota_mesoregiao": {
+      "tipo": "object",
+      "valores_unicos": 48,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "rota_microregiao": {
+      "tipo": "object",
+      "valores_unicos": 73,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "rota_municipio": {
+      "tipo": "object",
+      "valores_unicos": 125,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "id_transportadora": {
+      "tipo": "object",
+      "valores_unicos": 79,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "Date": {
+      "tipo": "datetime64[ns]",
+      "valores_unicos": 583,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "id_fatura": {
+      "tipo": "float64",
+      "valores_unicos": 109809,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "id_transporte": {
+      "tipo": "float64",
+      "valores_unicos": 57025,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "volume_ton": {
+      "tipo": "float64",
+      "valores_unicos": 21915,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "frete_brl": {
+      "tipo": "float64",
+      "valores_unicos": 91902,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "distancia_km": {
+      "tipo": "float64",
+      "valores_unicos": 147,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "preco_por_ton": {
+      "tipo": "float64",
+      "valores_unicos": 79475,
+      "valores_nulos": "42703",
+      "percentual_nulos": 29.724838334690695
+    },
+    "tku_calculado": {
+      "tipo": "float64",
+      "valores_unicos": 82461,
+      "valores_nulos": "45595",
+      "percentual_nulos": 31.737910776063096
+    },
+    "microregiao_origem": {
+      "tipo": "object",
+      "valores_unicos": 1,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    }
+  }
+}
