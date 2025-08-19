@@ -1,0 +1,168 @@
+{
+  "databricks_info": {
+    "compatibility": "Databricks/Spark Compatible",
+    "parquet_version": "2.6",
+    "compression": "snappy",
+    "created_with": "Polars + PyArrow",
+    "notes": "Timestamps convertidos para strings ISO para evitar conflitos de tipo"
+  },
+  "dataset_info": {
+    "nome": "Dados de Frete ArcelorMittal - Compatível com Databricks",
+    "descricao": "Dados históricos de fretes com análise de tendências TKU",
+    "fonte": "sample_data.xlsx",
+    "formato_original": "Excel (.xlsx)",
+    "formato_atual": "Parquet (.parquet)",
+    "data_criacao": "2025-08-19T09:09:17.557773",
+    "versao": "2.0 - Databricks Compatible"
+  },
+  "estatisticas": {
+    "total_registros": 143661,
+    "total_colunas": 20,
+    "periodo_dados": {
+      "inicio": "2024-01-01",
+      "fim": "2025-08-05"
+    }
+  },
+  "colunas": {
+    "data_faturamento": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 583,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "centro_origem": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 1,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "centro_origem_descricao": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 1,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "modal": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 4,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "tipo_rodovia": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 2,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "tipo_veiculo": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 9,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "rota_uf": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 16,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "rota_mesoregiao": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 48,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "rota_microregiao": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 73,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "rota_municipio": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 125,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "id_transportadora": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 79,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "Date": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 583,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "id_fatura": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 109809,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "id_transporte": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 57025,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "volume_ton": {
+      "tipo_pandas": "float64",
+      "tipo_parquet": "Float64",
+      "valores_unicos": 21915,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "frete_brl": {
+      "tipo_pandas": "float64",
+      "tipo_parquet": "Float64",
+      "valores_unicos": 91902,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "distancia_km": {
+      "tipo_pandas": "float64",
+      "tipo_parquet": "Float64",
+      "valores_unicos": 147,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    },
+    "preco_por_ton": {
+      "tipo_pandas": "float64",
+      "tipo_parquet": "Float64",
+      "valores_unicos": 79475,
+      "valores_nulos": "42703",
+      "percentual_nulos": 29.724838334690695
+    },
+    "tku_calculado": {
+      "tipo_pandas": "float64",
+      "tipo_parquet": "Float64",
+      "valores_unicos": 82461,
+      "valores_nulos": "45595",
+      "percentual_nulos": 31.737910776063096
+    },
+    "microregiao_origem": {
+      "tipo_pandas": "object",
+      "tipo_parquet": "Utf8",
+      "valores_unicos": 1,
+      "valores_nulos": "0",
+      "percentual_nulos": 0.0
+    }
+  }
+}
