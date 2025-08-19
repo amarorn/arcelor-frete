@@ -1,0 +1,11 @@
+{
+    "api": {
+        "base_url": "https://api.exemplo.com/v1",
+        "endpoint": "/frete/rotas",
+        "auth_token": "YOUR_TOKEN_HERE"
+    },
+    "ingestion": {
+        "batch_size": 1000,
+        "timeout": 30
+    }
+}

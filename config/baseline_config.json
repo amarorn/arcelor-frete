@@ -1,0 +1,150 @@
+{
+  "baseline_model": {
+    "name": "Frete Baseline Predictor",
+    "version": "1.0.0",
+    "description": "Modelo baseline para previsão de preços de frete com feature engineering avançado",
+    
+    "feature_engineering": {
+      "temporal_features": {
+        "enabled": true,
+        "features": [
+          "dia_semana", "dia_ano", "semana_ano", "trimestre", "ano",
+          "estacao", "mes_alta_temporada", "fim_semana", "mes", "dia_mes",
+          "semana_mes", "periodo_feriado"
+        ]
+      },
+      "geographic_features": {
+        "enabled": true,
+        "features": [
+          "estado_origem", "estado_destino", "regiao", "origem_sp", "destino_rj",
+          "passa_mg", "destino_rs", "destino_pr", "distancia_regional",
+          "categoria_distancia", "rota_interestadual"
+        ]
+      },
+      "operational_features": {
+        "enabled": true,
+        "features": [
+          "modal_encoded", "tipo_rodovia_encoded", "tipo_veiculo_encoded",
+          "eficiencia_volume", "custo_por_km", "custo_por_ton",
+          "categoria_volume", "categoria_distancia_km"
+        ]
+      },
+      "economic_features": {
+        "enabled": true,
+        "features": [
+          "preco_ton_km_calculado", "preco_por_ton", "preco_por_km",
+          "tonelada_km", "densidade_volume", "volume_quadrado", "distancia_quadrada",
+          "custo_efetivo", "custo_por_tonelada", "categoria_preco", "faixa_preco"
+        ]
+      },
+      "interaction_features": {
+        "enabled": true,
+        "features": [
+          "mes_volume", "trimestre_distancia", "ano_preco", "dia_semana_volume",
+          "sp_distancia", "rj_volume", "mg_preco", "modal_distancia",
+          "rodovia_volume", "veiculo_preco", "volume_distancia_mes",
+          "custo_trimestral", "preco_estacao"
+        ]
+      },
+      "derived_features": {
+        "enabled": true,
+        "features": [
+          "log_volume", "log_distancia", "log_frete", "sqrt_volume", "sqrt_distancia",
+          "inv_volume", "inv_distancia", "frete_volume_ratio", "distancia_volume_ratio",
+          "distancia_volume_diff", "frete_volume_diff", "percentil_volume", "percentil_distancia"
+        ]
+      }
+    },
+    
+    "baseline_models": {
+      "linear_regression": {
+        "enabled": true,
+        "description": "Regressão linear simples"
+      },
+      "ridge": {
+        "enabled": true,
+        "description": "Regressão Ridge com regularização L2"
+      },
+      "lasso": {
+        "enabled": true,
+        "description": "Regressão Lasso com regularização L1"
+      },
+      "random_forest": {
+        "enabled": true,
+        "description": "Random Forest para capturar não-linearidades"
+      },
+      "gradient_boosting": {
+        "enabled": true,
+        "description": "Gradient Boosting para performance superior"
+      },
+      "decision_tree": {
+        "enabled": true,
+        "description": "Árvore de decisão para interpretabilidade"
+      },
+      "knn": {
+        "enabled": true,
+        "description": "K-Nearest Neighbors para similaridade"
+      },
+      "svr": {
+        "enabled": true,
+        "description": "Support Vector Regression para dados complexos"
+      }
+    },
+    
+    "hyperparameter_tuning": {
+      "enabled": true,
+      "cv_folds": 5,
+      "scoring": "r2",
+      "n_jobs": -1,
+      "grid_search": {
+        "random_forest": {
+          "n_estimators": [50, 100, 200],
+          "max_depth": [5, 10, 15, null],
+          "min_samples_split": [2, 5, 10],
+          "min_samples_leaf": [1, 2, 4]
+        },
+        "gradient_boosting": {
+          "n_estimators": [50, 100, 200],
+          "learning_rate": [0.01, 0.1, 0.2],
+          "max_depth": [3, 5, 7],
+          "subsample": [0.8, 0.9, 1.0]
+        },
+        "ridge": {
+          "alpha": [0.1, 1.0, 10.0, 100.0]
+        },
+        "lasso": {
+          "alpha": [0.001, 0.01, 0.1, 1.0]
+        }
+      }
+    },
+    
+    "preprocessing": {
+      "numeric_transformer": {
+        "imputer": "median",
+        "scaler": "robust"
+      },
+      "categorical_transformer": {
+        "imputer": "constant",
+        "fill_value": "UNKNOWN",
+        "encoder": "label"
+      }
+    },
+    
+    "evaluation": {
+      "test_size": 0.2,
+      "random_state": 42,
+      "cv_folds": 5,
+      "metrics": ["mae", "rmse", "r2"],
+      "feature_importance": true
+    },
+    
+    "output": {
+      "save_model": true,
+      "save_preprocessor": true,
+      "save_metadata": true,
+      "formats": ["joblib", "pickle"],
+      "export_features": true,
+      "export_ranking": true
+    }
+  }
+}

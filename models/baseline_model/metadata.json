@@ -1,0 +1,22 @@
+{
+  "model_name": "linear_regression",
+  "best_score": 1.0,
+  "training_date": "2025-08-17T03:28:55.652292",
+  "features": {
+    "numeric": [
+      "volume_ton",
+      "distancia_km",
+      "mes",
+      "trimestre",
+      "ano"
+    ],
+    "categorical": [
+      "modal",
+      "tipo_rodovia",
+      "tipo_veiculo",
+      "rota",
+      "transportadora"
+    ]
+  },
+  "target": "preco_ton_km_calculado"
+}

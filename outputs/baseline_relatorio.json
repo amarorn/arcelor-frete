@@ -1,0 +1,74 @@
+{
+  "model_ranking": [
+    {
+      "model": "linear_regression",
+      "test_r2": 1.0,
+      "test_mae": 1.8407316202877054e-15,
+      "test_rmse": 2.913542830526993e-15,
+      "cv_r2_mean": 1.0
+    },
+    {
+      "model": "ridge",
+      "test_r2": 0.9999999998437163,
+      "test_mae": 7.102679008219785e-06,
+      "test_rmse": 1.738642937577546e-05,
+      "cv_r2_mean": 0.9999999993606903
+    },
+    {
+      "model": "lasso",
+      "test_r2": 0.9994431659664194,
+      "test_mae": 0.010391873992220581,
+      "test_rmse": 0.03281833262102539,
+      "cv_r2_mean": 0.9994096857157174
+    },
+    {
+      "model": "gradient_boosting",
+      "test_r2": 0.9871960379464015,
+      "test_mae": 0.009469874927572038,
+      "test_rmse": 0.15737140270734712,
+      "cv_r2_mean": 0.9465580087087215
+    },
+    {
+      "model": "random_forest",
+      "test_r2": 0.9862966915144371,
+      "test_mae": 0.003753843914920626,
+      "test_rmse": 0.1628044771746155,
+      "cv_r2_mean": 0.9614156765726243
+    },
+    {
+      "model": "knn",
+      "test_r2": 0.9248003421976744,
+      "test_mae": 0.06589556360220655,
+      "test_rmse": 0.38138320039838064,
+      "cv_r2_mean": 0.8965466452341048
+    },
+    {
+      "model": "decision_tree",
+      "test_r2": 0.7345709736083575,
+      "test_mae": 0.018329676767898526,
+      "test_rmse": 0.7165192022425833,
+      "cv_r2_mean": 0.896378507746687
+    },
+    {
+      "model": "svr",
+      "test_r2": 0.5430580328441434,
+      "test_mae": 0.07292627118449603,
+      "test_rmse": 0.9401218578997957,
+      "cv_r2_mean": 0.7476692502003808
+    }
+  ],
+  "best_model": {
+    "name": "linear_regression",
+    "score": 1.0,
+    "final_metrics": {
+      "mae": 1.847422599019984e-15,
+      "rmse": 2.8208960281402187e-15,
+      "r2": 1.0
+    }
+  },
+  "training_summary": {
+    "total_models": 8,
+    "successful_models": 8,
+    "failed_models": 0
+  }
+}

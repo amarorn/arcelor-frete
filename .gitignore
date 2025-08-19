@@ -1,0 +1,59 @@
+# Arquivos de configuração com segredos
+.databrickscfg
+.vscode/settings.json
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.*.local
+
+# Arquivos de cache e temporários
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Arquivos de dados grandes
+*.parquet
+*.csv
+*.xlsx
+*.xls
+
+# Arquivos de modelo ML
+*.pkl
+*.joblib
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db

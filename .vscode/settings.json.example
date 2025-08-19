@@ -1,0 +1,11 @@
+{
+    "databricks.workspace": {
+        "host": "https://your-workspace.azuredatabricks.net",
+        "token": "your-databricks-token-here",
+        "clusterId": "your-cluster-id-here"
+    },
+    "databricks.defaultLanguage": "python",
+    "databricks.showClusterSelection": true,
+    "jupyter.interactiveWindow.cellMarker.codeRegex": "^# COMMAND ----------|^# Databricks notebook source|^(#\\s*%%|#\\s*\\<codecell\\>|#\\s*In\\[\\d*?\\]|#\\s*In\\[ \\])",
+    "jupyter.interactiveWindow.cellMarker.default": "# COMMAND ----------"
+}

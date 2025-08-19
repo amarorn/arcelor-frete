@@ -1,0 +1,15 @@
+{
+  "numeric_features": [
+    "volume_ton",
+    "distancia_km",
+    "mes",
+    "trimestre",
+    "ano"
+  ],
+  "categorical_features": [
+    "modal",
+    "tipo_rodovia",
+    "tipo_veiculo"
+  ],
+  "target_feature": "preco_ton_km_calculado"
+}

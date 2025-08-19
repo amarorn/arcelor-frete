@@ -1,0 +1,50 @@
+{
+  "model_type": "RandomForestRegressor",
+  "features": {
+    "numeric": [
+      "volume_ton",
+      "distancia_km",
+      "mes",
+      "trimestre",
+      "ano"
+    ],
+    "categorical": [
+      "modal",
+      "tipo_rodovia",
+      "tipo_veiculo"
+    ]
+  },
+  "target": "preco_ton_km_calculado",
+  "model_params": {
+    "bootstrap": true,
+    "ccp_alpha": 0.0,
+    "criterion": "squared_error",
+    "max_depth": 10,
+    "max_features": 1.0,
+    "max_leaf_nodes": null,
+    "max_samples": null,
+    "min_impurity_decrease": 0.0,
+    "min_samples_leaf": 1,
+    "min_samples_split": 2,
+    "min_weight_fraction_leaf": 0.0,
+    "monotonic_cst": null,
+    "n_estimators": 100,
+    "n_jobs": -1,
+    "oob_score": false,
+    "random_state": 42,
+    "verbose": 0,
+    "warm_start": false
+  },
+  "feature_importance": {
+    "volume_ton": 0.41769255332244104,
+    "distancia_km": 0.436418864528472,
+    "mes": 0.0716066871323322,
+    "trimestre": 0.03159681987984839,
+    "ano": 0.0,
+    "modal": 0.0,
+    "tipo_rodovia": 0.026531682618416402,
+    "tipo_veiculo": 0.01615339251849009
+  },
+  "training_date": "2025-08-18 12:01:57.219987",
+  "version": "1.0"
+}

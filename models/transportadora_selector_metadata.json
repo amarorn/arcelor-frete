@@ -1,0 +1,59 @@
+{
+  "model_type": "RandomForestClassifier",
+  "features": {
+    "numeric": [
+      "volume_ton",
+      "distancia_km",
+      "preco_ton_km",
+      "preco_total",
+      "mes",
+      "trimestre",
+      "ano",
+      "volume_historico",
+      "performance_score",
+      "confiabilidade_score",
+      "capacidade_score",
+      "custo_beneficio_score"
+    ],
+    "categorical": [
+      "modal",
+      "tipo_rodovia",
+      "tipo_veiculo",
+      "regiao_origem",
+      "regiao_destino"
+    ]
+  },
+  "target_features": [
+    "transportadora_recomendada",
+    "score_recomendacao",
+    "categoria_prioridade"
+  ],
+  "criterios_avaliacao": {
+    "preco": 0.25,
+    "performance": 0.2,
+    "confiabilidade": 0.25,
+    "capacidade": 0.15,
+    "custo_beneficio": 0.15
+  },
+  "feature_importance": {
+    "volume_ton": 0.002497914824646583,
+    "distancia_km": 0.006202283141422698,
+    "preco_ton_km": 0.004286389134195503,
+    "preco_total": 0.00436038443367948,
+    "mes": 0.10978803273059523,
+    "trimestre": 0.0031542654244804524,
+    "ano": 0.0,
+    "volume_historico": 0.003043556491782159,
+    "performance_score": 0.1524620121566962,
+    "confiabilidade_score": 0.21040103804664523,
+    "capacidade_score": 0.16694835064425262,
+    "custo_beneficio_score": 0.18970055672565841,
+    "modal": 0.0,
+    "tipo_rodovia": 0.04393793662041969,
+    "tipo_veiculo": 0.1032172796255258,
+    "regiao_origem": 0.0,
+    "regiao_destino": 0.0
+  },
+  "training_date": "2025-08-18 12:02:01.949720",
+  "version": "1.0"
+}
