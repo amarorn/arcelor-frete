@@ -38,12 +38,6 @@ class HierarchicalGroupingAnalyzer:
         self.volume_minimo_benchmark = 1000  # 1000 toneladas como volume mínimo para benchmark
         self.volume_minimo_analise = 100     # 100 toneladas como volume mínimo para análise geral
         
-        # Configurações para cálculo inteligente do benchmark
-        self.percentil_benchmark = 75        # Percentil para definir volume mínimo do benchmark
-        self.min_rotas_benchmark = 10       # Mínimo de rotas para considerar benchmark válido
-        self.max_rotas_benchmark = 100      # Máximo de rotas para benchmark (evitar muito ruído)
-        self.adaptativo_benchmark = True    # Se deve calcular volume mínimo automaticamente
-        
         self.microregion_mapping = [
             ('JOÃO MONLEVADE', 'JOÃO MONLEVADE'),
             ('USINA MONLEVADE', 'JOÃO MONLEVADE'),
@@ -103,265 +97,6 @@ class HierarchicalGroupingAnalyzer:
         logger.info(f"Volumes mínimos configurados:")
         logger.info(f"  - Análise geral: {self.volume_minimo_analise:,} ton")
         logger.info(f"  - Benchmark: {self.volume_minimo_benchmark:,} ton")
-    
-    def configurar_benchmark_inteligente(self, 
-                                       percentil_benchmark=75,
-                                       min_rotas_benchmark=10,
-                                       max_rotas_benchmark=100,
-                                       adaptativo_benchmark=True):
-        """
-        Configura parâmetros para cálculo inteligente do volume mínimo do benchmark
-        
-        Args:
-            percentil_benchmark (int): Percentil para definir volume mínimo (25, 50, 75, 90)
-            min_rotas_benchmark (int): Mínimo de rotas para considerar benchmark válido
-            max_rotas_benchmark (int): Máximo de rotas para benchmark (evitar muito ruído)
-            adaptativo_benchmark (bool): Se deve calcular volume mínimo automaticamente
-        """
-        self.percentil_benchmark = percentil_benchmark
-        self.min_rotas_benchmark = min_rotas_benchmark
-        self.max_rotas_benchmark = max_rotas_benchmark
-        self.adaptativo_benchmark = adaptativo_benchmark
-        
-        logger.info(f"Benchmark inteligente configurado:")
-        logger.info(f"  - Percentil: {self.percentil_benchmark}%")
-        logger.info(f"  - Mínimo de rotas: {self.min_rotas_benchmark}")
-        logger.info(f"  - Máximo de rotas: {self.max_rotas_benchmark}")
-        logger.info(f"  - Modo adaptativo: {'Ativado' if self.adaptativo_benchmark else 'Desativado'}")
-    
-    def calcular_volume_minimo_inteligente(self, df):
-        """
-        Calcula o volume mínimo do benchmark de forma inteligente baseado nos dados
-        
-        Args:
-            df: DataFrame com dados de volume por rota
-            
-        Returns:
-            float: Volume mínimo calculado inteligentemente
-        """
-        logger.info("Calculando volume mínimo do benchmark de forma inteligente...")
-        
-        try:
-            # Calcular volume total por rota
-            df_volume_por_rota = df.groupBy('centro_origem', 'rota_municipio').agg(
-                {'volume_ton': 'sum'}
-            ).withColumnRenamed('sum(volume_ton)', 'volume_total_rota')
-            
-            # Converter para pandas para análise estatística
-            df_pandas = df_volume_por_rota.toPandas()
-            
-            if df_pandas.empty:
-                logger.warning("Dados vazios para cálculo do volume mínimo")
-                return self.volume_minimo_benchmark
-            
-            # Estatísticas descritivas dos volumes
-            volumes = df_pandas['volume_total_rota'].dropna()
-            
-            if len(volumes) == 0:
-                logger.warning("Nenhum volume válido encontrado")
-                return self.volume_minimo_benchmark
-            
-            # Calcular percentis
-            percentil_25 = volumes.quantile(0.25)
-            percentil_50 = volumes.quantile(0.50)
-            percentil_75 = volumes.quantile(0.75)
-            percentil_90 = volumes.quantile(0.90)
-            
-            # Calcular média e desvio padrão
-            media = volumes.mean()
-            desvio_padrao = volumes.std()
-            
-            # Calcular volume mínimo baseado no percentil configurado
-            if self.percentil_benchmark == 25:
-                volume_candidato = percentil_25
-            elif self.percentil_benchmark == 50:
-                volume_candidato = percentil_50
-            elif self.percentil_benchmark == 75:
-                volume_candidato = percentil_75
-            elif self.percentil_benchmark == 90:
-                volume_candidato = percentil_90
-            else:
-                # Interpolação linear entre percentis
-                if self.percentil_benchmark <= 50:
-                    peso = (self.percentil_benchmark - 25) / 25
-                    volume_candidato = percentil_25 + peso * (percentil_50 - percentil_25)
-                else:
-                    peso = (self.percentil_benchmark - 50) / 25
-                    volume_candidato = percentil_50 + peso * (percentil_75 - percentil_50)
-            
-            # Verificar quantas rotas seriam incluídas com esse volume
-            rotas_incluidas = len(volumes[volumes >= volume_candidato])
-            
-            logger.info(f"Análise estatística dos volumes:")
-            logger.info(f"  - Total de rotas: {len(volumes)}")
-            logger.info(f"  - Média: {media:,.1f} ton")
-            logger.info(f"  - Desvio padrão: {desvio_padrao:,.1f} ton")
-            logger.info(f"  - Percentil 25: {percentil_25:,.1f} ton")
-            logger.info(f"  - Percentil 50: {percentil_50:,.1f} ton")
-            logger.info(f"  - Percentil 75: {percentil_75:,.1f} ton")
-            logger.info(f"  - Percentil 90: {percentil_90:,.1f} ton")
-            
-            # Ajustar volume baseado no número de rotas desejado
-            volume_final = self._ajustar_volume_por_rotas(volumes, volume_candidato, rotas_incluidas)
-            
-            logger.info(f"Volume mínimo calculado inteligentemente:")
-            logger.info(f"  - Volume candidato: {volume_candidato:,.1f} ton")
-            logger.info(f"  - Rotas incluídas: {rotas_incluidas}")
-            logger.info(f"  - Volume final ajustado: {volume_final:,.1f} ton")
-            
-            return volume_final
-            
-        except Exception as e:
-            logger.error(f"Erro ao calcular volume mínimo inteligente: {str(e)}")
-            logger.info("Usando volume mínimo padrão")
-            return self.volume_minimo_benchmark
-    
-    def _ajustar_volume_por_rotas(self, volumes, volume_candidato, rotas_incluidas):
-        """
-        Ajusta o volume mínimo para garantir número adequado de rotas para benchmark
-        
-        Args:
-            volumes: Series com volumes das rotas
-            volume_candidato: Volume candidato inicial
-            rotas_incluidas: Número de rotas incluídas com volume candidato
-            
-        Returns:
-            float: Volume ajustado
-        """
-        # Se já está no range desejado, usar o candidato
-        if self.min_rotas_benchmark <= rotas_incluidas <= self.max_rotas_benchmark:
-            return volume_candidato
-        
-        # Se muito poucas rotas, diminuir o volume
-        if rotas_incluidas < self.min_rotas_benchmark:
-            # Buscar volume que inclua pelo menos min_rotas_benchmark
-            volumes_ordenados = sorted(volumes, reverse=True)
-            if len(volumes_ordenados) >= self.min_rotas_benchmark:
-                volume_ajustado = volumes_ordenados[self.min_rotas_benchmark - 1]
-                logger.info(f"Ajustando volume para incluir pelo menos {self.min_rotas_benchmark} rotas")
-                return volume_ajustado
-            else:
-                # Se não há rotas suficientes, usar o menor volume
-                return volumes.min()
-        
-        # Se muitas rotas, aumentar o volume
-        if rotas_incluidas > self.max_rotas_benchmark:
-            # Buscar volume que inclua no máximo max_rotas_benchmark
-            volumes_ordenados = sorted(volumes, reverse=True)
-            if len(volumes_ordenados) >= self.max_rotas_benchmark:
-                volume_ajustado = volumes_ordenados[self.max_rotas_benchmark - 1]
-                logger.info(f"Ajustando volume para incluir no máximo {self.max_rotas_benchmark} rotas")
-                return volume_ajustado
-            else:
-                return volume_candidato
-        
-        return volume_candidato
-    
-    def analisar_distribuicao_volumes(self, df):
-        """
-        Analisa a distribuição dos volumes para otimização do benchmark
-        
-        Args:
-            df: DataFrame com dados de volume
-            
-        Returns:
-            dict: Análise da distribuição dos volumes
-        """
-        logger.info("Analisando distribuição dos volumes para otimização...")
-        
-        try:
-            # Calcular volume total por rota
-            df_volume_por_rota = df.groupBy('centro_origem', 'rota_municipio').agg(
-                {'volume_ton': 'sum'}
-            ).withColumnRenamed('sum(volume_ton)', 'volume_total_rota')
-            
-            # Converter para pandas
-            df_pandas = df_volume_por_rota.toPandas()
-            volumes = df_pandas['volume_total_rota'].dropna()
-            
-            if len(volumes) == 0:
-                return {"erro": "Nenhum volume válido encontrado"}
-            
-            # Análise estatística completa
-            analise = {
-                "total_rotas": len(volumes),
-                "media": float(volumes.mean()),
-                "mediana": float(volumes.median()),
-                "desvio_padrao": float(volumes.std()),
-                "minimo": float(volumes.min()),
-                "maximo": float(volumes.max()),
-                "percentis": {
-                    "25": float(volumes.quantile(0.25)),
-                    "50": float(volumes.quantile(0.50)),
-                    "75": float(volumes.quantile(0.75)),
-                    "90": float(volumes.quantile(0.90)),
-                    "95": float(volumes.quantile(0.95))
-                },
-                "faixas_volume": {
-                    "0-100": len(volumes[(volumes >= 0) & (volumes < 100)]),
-                    "100-500": len(volumes[(volumes >= 100) & (volumes < 500)]),
-                    "500-1000": len(volumes[(volumes >= 500) & (volumes < 1000)]),
-                    "1000-5000": len(volumes[(volumes >= 1000) & (volumes < 5000)]),
-                    "5000+": len(volumes[volumes >= 5000])
-                }
-            }
-            
-            # Recomendações baseadas na análise
-            analise["recomendacoes"] = self._gerar_recomendacoes_volume(analise)
-            
-            logger.info(f"Análise de distribuição concluída:")
-            logger.info(f"  - Total de rotas: {analise['total_rotas']}")
-            logger.info(f"  - Média: {analise['media']:,.1f} ton")
-            logger.info(f"  - Mediana: {analise['mediana']:,.1f} ton")
-            
-            return analise
-            
-        except Exception as e:
-            logger.error(f"Erro na análise de distribuição: {str(e)}")
-            return {"erro": str(e)}
-    
-    def _gerar_recomendacoes_volume(self, analise):
-        """
-        Gera recomendações baseadas na análise da distribuição dos volumes
-        
-        Args:
-            analise: Dicionário com análise estatística
-            
-        Returns:
-            list: Lista de recomendações
-        """
-        recomendacoes = []
-        
-        total_rotas = analise["total_rotas"]
-        
-        # Analisar distribuição por faixas
-        faixas = analise["faixas_volume"]
-        
-        # Se muitas rotas com volume baixo, sugerir ajuste
-        if faixas["0-100"] > total_rotas * 0.3:
-            recomendacoes.append("Muitas rotas com volume baixo (< 100 ton) - considerar filtro mais rigoroso")
-        
-        # Se poucas rotas com volume alto, sugerir percentil menor
-        if faixas["1000+"] < total_rotas * 0.1:
-            recomendacoes.append("Poucas rotas com volume alto (> 1000 ton) - usar percentil 50 ou 25")
-        
-        # Se distribuição muito desigual, sugerir percentil intermediário
-        if faixas["500-1000"] < total_rotas * 0.05:
-            recomendacoes.append("Distribuição muito desigual - usar percentil 75 para equilibrar")
-        
-        # Se muitas rotas qualificadas, sugerir percentil maior
-        if faixas["1000+"] > total_rotas * 0.4:
-            recomendacoes.append("Muitas rotas qualificadas - usar percentil 90 para maior seletividade")
-        
-        # Recomendação de percentil ideal
-        if faixas["1000+"] >= total_rotas * 0.2:
-            recomendacoes.append("Usar percentil 75 - boa relação entre qualidade e quantidade")
-        elif faixas["1000+"] >= total_rotas * 0.1:
-            recomendacoes.append("Usar percentil 50 - equilibrar quantidade e qualidade")
-        else:
-            recomendacoes.append("Usar percentil 25 - priorizar quantidade de rotas para benchmark")
-        
-        return recomendacoes
     
     def load_data_from_excel(self, excel_path: str):
         """
@@ -700,20 +435,14 @@ class HierarchicalGroupingAnalyzer:
         total_rotas_antes_benchmark = df_volume_por_rota.count()
         logger.info(f"Total de rotas ANTES do filtro de benchmark: {total_rotas_antes_benchmark}")
         
-        # CALCULAR VOLUME MÍNIMO INTELIGENTEMENTE se ativado
-        volume_minimo_benchmark_efetivo = self.volume_minimo_benchmark
-        if self.adaptativo_benchmark:
-            volume_minimo_benchmark_efetivo = self.calcular_volume_minimo_inteligente(df)
-            logger.info(f"Volume mínimo adaptativo calculado: {volume_minimo_benchmark_efetivo:,.1f} ton")
-        
         # Filtrar rotas com volume total >= volume mínimo para benchmark
         df_rotas_volume_alto = df_volume_por_rota.filter(
-            col('volume_total_rota') >= volume_minimo_benchmark_efetivo
+            col('volume_total_rota') >= self.volume_minimo_benchmark
         )
         
         # Contar rotas APÓS filtro de benchmark
         total_rotas_apos_benchmark = df_rotas_volume_alto.count()
-        logger.info(f"Total de rotas APÓS filtro de benchmark (>= {volume_minimo_benchmark_efetivo:,.1f} ton): {total_rotas_apos_benchmark}")
+        logger.info(f"Total de rotas APÓS filtro de benchmark (>= {self.volume_minimo_benchmark} ton): {total_rotas_apos_benchmark}")
         
         # Aplicar o filtro de volume no cálculo do benchmark
         df_microregiao_prices = df.join(
@@ -728,10 +457,9 @@ class HierarchicalGroupingAnalyzer:
         total_rotas_benchmark = df_rotas_volume_alto.count()
         
         logger.info(f"Benchmark - Filtro de volume aplicado:")
-        logger.info(f"  - Volume mínimo configurado: {self.volume_minimo_benchmark:,} ton")
-        logger.info(f"  - Volume mínimo efetivo: {volume_minimo_benchmark_efetivo:,.1f} ton")
+        logger.info(f"  - Volume mínimo para benchmark: {self.volume_minimo_benchmark:,} ton")
         logger.info(f"  - Rotas para benchmark: {total_rotas_benchmark}")
-        logger.info(f"  - Filtro aplicado: apenas rotas com volume >= {volume_minimo_benchmark_efetivo:,.1f} ton")
+        logger.info(f"  - Filtro aplicado: apenas rotas com volume >= {self.volume_minimo_benchmark:,} ton")
         
         # 5. Mesclar todos os níveis usando a micro-região correta
         # Primeiro, vamos adicionar a micro-região de origem ao df_nivel3
@@ -962,9 +690,6 @@ def main():
         # Configurar volumes mínimos
         analyzer.configurar_volumes_minimos(volume_minimo_analise=100, volume_minimo_benchmark=1000)
         
-        # Configurar benchmark inteligente
-        analyzer.configurar_benchmark_inteligente(percentil_benchmark=75, min_rotas_benchmark=10, max_rotas_benchmark=100, adaptativo_benchmark=True)
-        
         # Caminho para o arquivo de dados
         excel_path = "sample_data.xlsx"
         
@@ -1005,25 +730,6 @@ def main():
         
         # Preparar dados para hierarquia
         df_processed = analyzer.prepare_data_hierarchical(df_filtered)
-        
-        # ANALISAR DISTRIBUIÇÃO DOS VOLUMES para otimização do benchmark
-        logger.info("=" * 60)
-        logger.info("ANÁLISE DA DISTRIBUIÇÃO DOS VOLUMES")
-        logger.info("=" * 60)
-        
-        analise_distribuicao = analyzer.analisar_distribuicao_volumes(df_processed)
-        if "erro" not in analise_distribuicao:
-            logger.info(f"Distribuição por faixas de volume:")
-            for faixa, quantidade in analise_distribuicao["faixas_volume"].items():
-                logger.info(f"  - {faixa}: {quantidade} rotas")
-            
-            logger.info(f"\nRecomendações para otimização:")
-            for recomendacao in analise_distribuicao["recomendacoes"]:
-                logger.info(f"  - {recomendacao}")
-        else:
-            logger.warning(f"Erro na análise de distribuição: {analise_distribuicao['erro']}")
-        
-        logger.info("=" * 60)
         
         # Criar estrutura hierárquica
         df_hierarchical = analyzer.create_hierarchical_structure(df_processed)
